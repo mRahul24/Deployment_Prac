@@ -22,26 +22,26 @@ pipeline {
             steps {
                 echo "Hello Rahul"
                 sh 'ls'
-                sh 'docker build -t  mRahul24/docker_file:${BUILD_NUMBER} .'
+                sh 'docker build -t  mrahul24/docker_file:${BUILD_NUMBER} .'
             }
         }
         stage('Docker Login'){
 
             steps {
                  withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh "docker login -u mRahul24 -p ${Dockerpwd}"
+                    sh "docker login -u mrahul24 -p ${Dockerpwd}"
                 }
             }
         }
         stage('Docker Push'){
             steps {
-                sh 'docker push mRahul24/docker_file:${BUILD_NUMBER}'
+                sh 'docker push mrahul24/docker_file:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
 
-                sh 'docker run -itd -p  8081:8080 mRahul24/docker_file:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8081:8080 mrahul24/docker_file:${BUILD_NUMBER}'
             }
         }
         stage('Archving') {
