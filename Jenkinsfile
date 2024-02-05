@@ -20,9 +20,9 @@ pipeline {
         stage('Build Docker image'){
 
             steps {
-                echo "Hello Java Express"
+                echo "Hello Rahul"
                 sh 'ls'
-                sh 'docker build -t  mRahul24/deploy_prac:${BUILD_NUMBER} .'
+                sh 'docker build -t  mRahul24/docker_file:${BUILD_NUMBER} .'
             }
         }
         stage('Docker Login'){
@@ -35,13 +35,13 @@ pipeline {
         }
         stage('Docker Push'){
             steps {
-                sh 'docker push mRahul24/deploy_prac:${BUILD_NUMBER}'
+                sh 'docker push mRahul24/docker_file:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
 
-                sh 'docker run -itd -p  8081:8080 mRahul24/deploy_prac:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8081:8080 mRahul24/docker_file:${BUILD_NUMBER}'
             }
         }
         stage('Archving') {
